@@ -1,0 +1,59 @@
+{% load static %}
+
+{% comment %}
+    The layout file is organising the layout of the page. It tells where
+    the header, body and footer has to be. Same with every other page I will
+    be creating. This is to not repeat everyhting in every folder. 
+{% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en-UK">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+        <title>Origin A Level</title>
+    {% endblock title %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/colors.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/components.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/responsive.css' %}">
+
+        {% block styling %}
+        {% endblock styling %}
+
+</head>
+
+<body>
+    <div class='page-body'>
+        <section class="main-header">
+            <div class="container">
+                {% include './header.html' with posts=context.posts %}
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="layout">
+                {% comment%}
+                    Structure body of main page. 
+                    The body is made up of multiple content files.
+                {% endcomment %}
+                <section class="main-content">
+                    {% block content %}
+                        {% include './post_button.html' %}
+                        {% include './content.html' %}
+                    {% endblock content %}
+                </section>
+            </div>
+        </div>
+
+        <section class="main-footer">
+            {% include './footer.html' %}
+        </section>
+    </div>
+</body>
+</html>
+

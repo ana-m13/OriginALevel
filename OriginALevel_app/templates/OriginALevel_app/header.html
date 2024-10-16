@@ -1,0 +1,81 @@
+{#% To serve files such as CSS and HTML which are static, as Django doesn't serve files. %#}
+{#% Without load Django doesn't know where the files CSS and HTML are which are served by the web server. Static is the way to those files %#}
+{% load static %}
+
+
+{#% I've made a class for every existent 'icon' present in the header: the logo, home, notifications and account. I have also made a searching index %#}
+<div class="header-wrapper">
+    <div class="header-col header-col-left">
+        {#% This will put the OrignALevel logo on the left side of the header as well as the home icon %#}
+        <a class="header--home-link" href="{% url 'home' %}">
+            <span>OriginALevel</span>
+            <div class="icon"><img src="{% static 'img/icon-home.png' %}" alt="home-icon" width="35px"></div>
+        </a>
+        {% if request.session.user_name_from_session %}
+            <p>Welcome, <span class="header--username"> {{request.session.user_name_from_session |capfirst}}</span></p>
+        {% endif %}
+    </div>
+
+
+    <div class="header-col header-col-right">
+        {#% The search engine, and the other two icons will be on the right side of the header %#}
+        {% if user.is_authenticated %}
+        {% comment %} GET method allows the user to send data to the server, the server then responds if the data sent is found correct after being processed {% endcomment %}
+        {% comment %} After the user sends data, the server responds by sending back the same homepage but the data gets filtrated {% endcomment %}
+        {% comment %} Doing the search engine {% endcomment %}
+        <form method='GET' style="mrgin: 0; padding: 0; display: contents;">
+            <input type="text" name="search" id="search" placeholder="Search">
+        </form>
+        <div class="icon"><img src="{% static 'img/icon-notifications.png' %}" alt="notifications-icon" width="35px"></div>
+        <div class="icon"><a href="{% url 'logout' %}"><img src="{% static 'img/icon-account.png' %}" alt="account-icon" width="35px"></a></div>
+        {% else %}
+        <div class="icon"><a href="{% url 'login' %}"><img src="{% static 'img/icon-account.png' %}" alt="account-icon" width="35px"></a></div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .header-wrapper {
+        display: flex;
+        justify-content: stretch;
+        align-items: center;
+        gap: .5em;
+    }
+
+    .header-wrapper img {
+        opacity: .4;
+    }
+
+    .header-col {
+        /* background-color: grey; */
+        display: flex;
+        width: 100%;
+        align-items: center;
+        gap: 1em;
+    }
+
+    .header-col-left {
+        text-align: left;
+
+    }
+    .header-col-right {
+        display: flex;
+        justify-content: end;
+    }
+    .icon {
+        display: inline;
+
+    }
+    .header--home-link {
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        gap: .5em;
+    }
+
+    .header--username {
+        font-weight: 700;
+        color: var(--color-dark-blue);
+    }
+</style>
+

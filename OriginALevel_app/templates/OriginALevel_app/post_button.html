@@ -1,0 +1,45 @@
+{% comment%}
+    Content.html is the file for a question post
+{% endcomment %}
+
+{% comment%}
+    Body is the name of the html tag. I used the name content instead. 
+{% endcomment %}
+
+
+<div class="content-wrapper">
+    {% comment %} the box where the button exists in {% endcomment %}
+    <div>
+        <div class="btn-container">
+        <a class="btn--ask--question"href="{% url 'post' %}">Ask a question</a>
+    </div>
+</div>
+ 
+
+<style>
+    .btn-container {
+        width: 100%;
+        border: 1px solid var(--color-white);
+        border-radius: var(--border-radius);
+        padding: 2em;
+        box-shadow: var(--box-shadow);
+   }
+
+   .btn--ask--question {
+        display: block;
+        font-style: italic;
+        padding: .5rem 1em; 
+        border-radius: var(--border-radius);
+        background-color: var(--color-white);
+        color: var(--color-dark-blue);
+   }
+
+   .btn--ask--question:hover,
+   .btn--ask--question:active {
+        box-shadow: 0 0 0 2px rgba(136, 89, 164, 1), 0 0 0 4px rgba(136, 89, 164, 0.5);
+        background-color: rgb(187, 187, 187);
+   }
+</style>
+
+
+

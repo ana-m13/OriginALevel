@@ -1,0 +1,129 @@
+/* 'Open Sans' font from Google Fonts */
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
+
+
+/* rem -> root em; dynamic value set in the browser. If you cange it in the browser it changes on the website as well */
+:root {
+  --border-radius: 5px;
+}
+
+
+html,
+body {
+  height: 100vh;
+  width: 100%;
+}
+
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1em;
+  line-height: 1;
+  color: var(--color-dark-blue);
+}
+
+body input[type="text"], 
+body textarea {
+  border-radius: var(--border-radius);
+  background-color: var(--color-pink);
+  border-radius: var(--border-radius);
+  color: var(--color-dark-blue);
+  padding: .5em 1em;
+  width: 100%;
+}
+
+body input[type="text"]:focus, 
+body textarea:focus {
+  background-color: var(--color-white);
+  box-shadow: var(--border-focus);
+}
+
+.page-body {
+  background: linear-gradient(#463E5B, var(--color-dark-blue));
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: calc(100vh - 257px);
+}
+
+
+.main-header {
+  background-color: var(--color-header);        /* var(--color-pink);*/
+  width: 100%;
+  border-bottom: 4px solid #AB879F; 
+  box-shadow: 0 5px 4px rgba(0,0,0,0.25);
+}
+.main-content {
+  /* background-color: var(--color-header);  */
+  height: 100%;
+  margin-top: 2em;
+
+}
+.main-footer {
+  background-color: var(--color-dark-blue);
+  color: var(--color-white);
+  min-height: 150px;
+}
+
+.container {
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+section {
+  padding: 1em .5em;
+}
+
+/* post a question styling */
+.post-container {
+  background-color: var(--color-header);
+  padding: 1em;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+} 
+
+/* end of post a question styling */
+
+.btn {
+  display: block;
+  background-color: var(--color-blue);
+  color: var(--color-pink);
+  padding: .5em 1em;
+  border-radius: var(--border-radius);
+}
+
+.btn:hover,
+.btn:active {
+  filter: brightness(110%);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn-secondary {
+  filter: opacity(70%) brightness(120%);
+  color: var(--color-header);
+}
+
+.autotag {
+  display: inline;
+  background-color: var(--color-blue);
+  color : var(--color-white);
+  padding: .5em;
+  margin-block: 2em;
+  font-size: italic;
+  border-radius: var(--border-radius);
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  margin: 1em 0;
+}

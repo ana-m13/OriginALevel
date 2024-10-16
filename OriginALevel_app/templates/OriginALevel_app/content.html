@@ -1,0 +1,153 @@
+{% comment%} Content.html is the file for a question post {% endcomment %}
+{% comment%} Body is the name of the html tag. I used the name content instead. {% endcomment %}
+<div class="content-wrapper">
+    {% for post in posts.all reversed %}
+    
+        <div class="card post-question">   
+            <p class="" style="padding-bottom: 1em, text-align: right;"> post_id: {{ post_id }}</p>
+            <p class="post">{{ post.title }}</p>
+            <p class="post">{{ post.body }}</p>
+
+            {% if post.tag_code %}
+                <div style="margin-block:2em;">
+                    <p class="autotag">{{ post.tag_code }}</p>
+                    <p class="autotag">{{ post.tag_title }}</p> 
+                </div>
+            {% endif %} 
+
+            {% if post.replies.count > 0 %}
+                <details>
+                    {% comment %} checks how many replies there are to not user reply/replies wrong {% endcomment %}
+                    <summary>{{ post.replies.count }} {% if post.replies.count > 1 %} replies {% else %} reply {% endif %}</summary>
+                    {% for reply in post.replies.all %}
+                        <div class="reply-card">
+                            <p class="">{{ reply.body }}</p>
+                            <p class="" style="border-top: 1px solid grey; padding-block: .5em; margin-top: 1em; text-align: right;">user: [{{ reply.replied_by }}], {{ reply.created_at }}</p>
+                        </div>
+                    {% endfor %}
+                </details>
+            {% endif %}
+
+            {% comment %} this for is for the reply button to be able to respond  {% endcomment %}
+            <form action="{% url 'reply' %}" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                <input class="btn-answers" type="submit" value="Respond">
+            </form>
+            {% comment %} sending the current post to be able to see the avg rating {% endcomment %}
+            {% include 'OriginALevel_app/rating.html' with rating__avg_value=post.get_rating_avg rating__count=post.get_rating_count %} 
+
+
+            <p class="" style="text-align: right;">{{ post.user }} | {{ post.created_at }}</p>
+
+        </div>
+    {% endfor %}
+</div>
+
+
+<style>
+    summary {
+        display: block;
+        background-color: #968896;
+        padding: 1em;
+        border-radius: 7px;
+    }
+    summary::-webkit-details-marker {
+        display: none;
+    }
+    summary:hover {
+        background-color: #a89ca8
+        cursor: pointer;
+    }
+    summary:focus {
+        outline: none;
+    }
+    summary:after {
+        content: "▼";
+        float: right;
+        margin-right: 1em;
+    }
+    summary[open]:after {
+        content: "▲";
+    }
+
+    details {
+        background-color: #968896;
+        padding: .5em;
+        border-radius: 7px;
+    }
+    details[open] {
+        display: block;
+    }
+    details[open] summary {
+        border-radius: 7px 7px 0 0;
+        border-bottom: 1px solid #806678;
+    }
+    details[open] summary:after {
+        content: "▲";
+    }
+    details[open] details {
+        border-radius: 0 0 7px 7px;
+    }
+    details[open] details[open] {
+        border-radius: 0;
+    }
+
+    .reply-card {
+        padding: 1.4em 1em;
+        margin: 1em 0;
+        background-color: #9e929e;
+        border: 1px solid #806678;
+        border-radius: 4px;
+        margin-left: 2em;
+        margin-right: 2em;
+    }  
+    {% comment %} details {
+            display: block;
+            background-color: #968896;
+            border-radius: 0 0 7px 7px;
+            padding: 1em;
+        } {% endcomment %}
+    
+    .card {
+        background-color: var(--color-header);
+        padding: 1em;
+        border-radius: 8px;
+        box-shadow: var(--box-shadow);
+        padding: 2em;
+        margin-block: 2em;
+    }
+
+    .card input {
+        width: 100%;
+        margin-block: 1em;
+    }
+
+    .post-question .post:first-of-type {
+        font-weight: 700;
+    }
+
+    .post-question .post {
+        background-color: var(--color-pink);
+        padding: .5em 1em;
+        margin-bottom: 1em;
+        border-radius: var(--border-radius);
+    }
+
+    .post-question .btn-answers {
+        border: 1px solid var(--color-pink);
+        padding: .5em 1em;
+        border-radius: var(--border-radius);
+        margin-block: 2em;
+        max-width: max-content;
+        cursor: pointer;
+    }
+    .post-question .btn-answers:hover {
+        background-color: var(--color-pink);
+        color: var(--color-dark-blue);
+    }
+
+</style>
+
+
+

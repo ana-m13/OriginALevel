@@ -1,0 +1,37 @@
+{% extends 'OriginALevel_app/layout.html' %}
+{% load static %}
+
+{% comment %} Eerything in block content will be extracted and put in block content in layout {% endcomment %}
+
+{% block title %}
+    <title>New Post</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="post-container">
+          <form action="" method="POST" class="">
+            {% csrf_token %}
+      
+            {{post_form.title}}
+            <p class="login-error">{{ form.username.errors }}</p>
+      
+            {{post_form.body}}
+            <p class="login-error">{{ form.password.errors }}</p>
+      
+            <input class="btn" type="submit" value="Post Question">
+            <input class="btn btn-secondary" type="submit" value="Cancel" onclick="history.back()">
+          </form>
+          
+    </div>    
+{% endblock content %}
+
+
+
+<style>
+
+</style>
+
+
+
+
+

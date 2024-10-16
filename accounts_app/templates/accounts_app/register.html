@@ -1,0 +1,37 @@
+{% extends 'OriginALevel_app/layout.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Register</title>
+{% endblock title%}
+
+{% block content %}
+    <div class="login">
+        <div class="login-triangle"></div>
+        <h2 class="login-header">SignUp</h2>
+
+        <form action='' method='POST' class="login-container"> {% comment %} sends back to login_view {% endcomment %}
+          {% csrf_token %}
+          
+          {{ form.username }}
+          {{ form.username.errors }}
+
+          {{ form.email }}
+          {{ form.email.errors }}
+
+          {{ form.password1 }}
+          {{ form.password1.errors }}
+
+          {{ form.password2 }}
+          {{ form.password2.errors }}
+
+          <p>Already have an account? <a href="{% url 'login' %}">Login</a></p>
+          <p><input type="submit" value="Create account"></p>
+        </form>
+      </div>
+{% endblock content %}
+
+
+
+
+

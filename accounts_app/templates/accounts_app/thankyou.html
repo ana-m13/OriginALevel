@@ -1,0 +1,15 @@
+{% extends 'OriginALevel_app/layout.html' %}
+{% load static %}
+
+
+{% block title %}
+    <title>Account confirmation</title>
+{% endblock title%}
+
+
+{% block content %}
+        <h2>Thank you for you registration!</h2>
+        {% comment %} span is used to style the email differently {% endcomment %}
+        <p>We have sent an email to <span>{{user.email}}</span> to conform the validity of your email address. After receiving the email, follow the link provided to complete your registration.</p>
+
+{% endblock content %}

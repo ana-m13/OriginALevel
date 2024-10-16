@@ -1,0 +1,28 @@
+/* For extremely small screen devices (595px and below) */
+@media only screen and (max-width: 595px) {
+    .container {
+        max-width: 565px;
+    }
+  }
+ 
+ 
+/* Medium screen devices (768px and above) */
+@media only screen and (min-width: 768px) {
+    .container {
+        max-width: 738px;
+    }
+  }
+ 
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 1024px) {
+    .container {
+        max-width: 800px;
+    }
+  }
+ 
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1152px) {
+    .container {
+        max-width: 1024px;
+    }
+  }
